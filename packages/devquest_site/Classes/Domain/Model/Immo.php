@@ -1,4 +1,5 @@
 <?php
+
 // Classes/Domain/Model/Immo.php
 declare(strict_types=1);
 
@@ -16,14 +17,29 @@ final class Immo extends AbstractEntity
     protected string $postalCode = '';
     protected string $city = '';
 
+    public function __toString(): string
+    {
+        return implode('; ', [
+            $this->street,
+            $this->postalCode,
+            $this->city,
+            $this->coldRent,
+            $this->warmRent,
+            $this->area,
+            $this->rooms,
+        ]);
+    }
+
     public function getColdRent(): float
     {
         return $this->coldRent;
     }
 
-    public function setColdRent(float $coldRent): void
+    public function setColdRent(float $coldRent): self
     {
         $this->coldRent = $coldRent;
+
+        return $this;
     }
 
     public function getWarmRent(): float
@@ -31,9 +47,11 @@ final class Immo extends AbstractEntity
         return $this->warmRent;
     }
 
-    public function setWarmRent(float $warmRent): void
+    public function setWarmRent(float $warmRent): self
     {
         $this->warmRent = $warmRent;
+
+        return $this;
     }
 
     public function getArea(): float
@@ -41,9 +59,11 @@ final class Immo extends AbstractEntity
         return $this->area;
     }
 
-    public function setArea(float $area): void
+    public function setArea(float $area): self
     {
         $this->area = $area;
+
+        return $this;
     }
 
     public function getRooms(): int
@@ -51,9 +71,11 @@ final class Immo extends AbstractEntity
         return $this->rooms;
     }
 
-    public function setRooms(int $rooms): void
+    public function setRooms(int $rooms): self
     {
         $this->rooms = $rooms;
+
+        return $this;
     }
 
     public function getStreet(): string
@@ -61,9 +83,11 @@ final class Immo extends AbstractEntity
         return $this->street;
     }
 
-    public function setStreet(string $street): void
+    public function setStreet(string $street): self
     {
         $this->street = $street;
+
+        return $this;
     }
 
     public function getPostalCode(): string
@@ -71,9 +95,11 @@ final class Immo extends AbstractEntity
         return $this->postalCode;
     }
 
-    public function setPostalCode(string $postalCode): void
+    public function setPostalCode(string $postalCode): self
     {
         $this->postalCode = $postalCode;
+
+        return $this;
     }
 
     public function getCity(): string
@@ -81,8 +107,10 @@ final class Immo extends AbstractEntity
         return $this->city;
     }
 
-    public function setCity(string $city): void
+    public function setCity(string $city): self
     {
         $this->city = $city;
+
+        return $this;
     }
 }

@@ -1,25 +1,34 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Mbx\DevquestSite\Controller;
 
-use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Http\JsonResponse;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use Mbx\DevquestSite\Domain\Repository\ImmoRepository;
+use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 final class ImmoController extends ActionController
 {
-    private ImmoRepository $immoRepository;
-
-    #[Required]
-    public function injectImmoRepository(ImmoRepository $immoRepository): void
-    {
-        $this->immoRepository = $immoRepository;
-    }
+    public function __construct(
+        private readonly ImmoRepository $immoRepository,
+    ) {}
 
     public function listAction(): ResponseInterface
     {
-        return new JsonResponse(['data' => ["dummy"]]);
+        $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
+
+        $immos = $this->immoRepository->findAll()->toArray();
+
+        $jsonContent = $serializer->serialize($immos, 'json', [
+            'groups' => ['api'],
+            AbstractNormalizer::IGNORED_ATTRIBUTES => ['pid', 'uid'],
+        ]);
+
+        return $this->jsonResponse($jsonContent);
     }
 }

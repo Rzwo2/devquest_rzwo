@@ -15,8 +15,10 @@ services:
     autowire: true
     autoconfigure: true
 
-  Mbx\DevquestSite\Command\ImmoImportCommand:
-    tags:
-      - name: 'console.command'
-        command: 'devquest_site:immoImport'
-        schedulable: true
+  # Mbx\DevquestSite\Command\ImmoImportCommand:
+  #   autowire: true
+  #   autoconfigure: true
+  #   tags:
+  #     - name: 'console.command'
+  #       command: 'devquest_site:immoImport'
+  #       schedulable: true

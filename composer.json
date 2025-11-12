@@ -16,6 +16,7 @@
 	"require": {
 		"friendsoftypo3/content-blocks": "^1.3",
 		"mbx/devquest-site": "@dev",
+		"symfony/serializer": "^7.3",
 		"typo3/cms-backend": "^13.4",
 		"typo3/cms-belog": "^13.4",
 		"typo3/cms-beuser": "^13.4",
@@ -47,5 +48,9 @@
 			"type": "path",
 			"url": "./packages/*"
 		}
-	]
+	],
+	"require-dev": {
+		"friendsofphp/php-cs-fixer": "^3.89",
+		"phpunit/phpunit": "^11.5"
+	}
 }
